@@ -1,26 +1,15 @@
 {
   "name": "HexaBot Translator",
   "version": "1.0.0",
-  "description": "A Discord bot that translates text and allows customizable status messages.",
+  "description": "A translator bot using Node.js for Render.com",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "discord.js": "^14.0.0",
-    "axios": "^0.21.1",
-    "dotenv": "^10.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.7"
-  },
-  "keywords": [
-    "discord",
-    "bot",
-    "translator",
-    "language"
-  ],
-  "author": "HexaBot translator",
-  "license": "MIT"
+    "dotenv": "^16.0.0",
+    "mongodb": "^5.0.0",
+    "axios": "^0.27.2"
+  }
 }
