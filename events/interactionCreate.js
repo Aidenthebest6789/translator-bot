@@ -1,9 +1,16 @@
 module.exports = {
-  name: 'ready',
-  once: true,
-  execute(client) {
-    console.log(`Logged in as ${client.user.tag}`);
-    const config = require('../config.json');
-    client.user.setActivity(config.status);
+  name: 'interactionCreate',
+  async execute(interaction) {
+    if (!interaction.isCommand()) return;
+
+    const command = interaction.client.commands.get(interaction.commandName);
+    if (!command) return;
+
+    try {
+      await command.execute(interaction);
+    } catch (error) {
+      console.error(error);
+      await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    }
   }
 };
