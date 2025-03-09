@@ -1,19 +1,13 @@
-function execute(interaction) {
-    const statusMessage = interaction.options.getString('message');
-    
-    if (!statusMessage) {
-        return interaction.reply('Please provide a status message.');
-    }
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
-    // Set the bot's status message
-    interaction.client.user.setActivity(statusMessage, { type: 'WATCHING' })
-        .then(() => {
-            interaction.reply(`Status message set to: "${statusMessage}"`);
-        })
-        .catch(error => {
-            console.error('Error setting status:', error);
-            interaction.reply('There was an error setting the status message.');
-        });
-}
-
-module.exports = { execute };
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName('status')
+    .setDescription('Set a custom status for the bot')
+    .addStringOption(option => option.setName('status').setDescription('Custom status').setRequired(true)),
+  async execute(interaction) {
+    const status = interaction.options.getString('status');
+    interaction.client.user.setActivity(status);
+    await interaction.reply(`Status set to: ${status}`);
+  }
+};
